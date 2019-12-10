@@ -1,5 +1,5 @@
 #top-bar{
-  background-color: rgb(167, 69, 219);
+  background-color: rgba(11, 175, 96, 0.707);
   border-radius: 3px;
   justify-content: right;
   font-family: sans 'Courier New',fantasy;
@@ -20,7 +20,7 @@
   margin:10px;
 }
 #client-bar{
-  background-color: rgb(166, 70, 218);
+  background-color: rgba(11, 175, 150, 0.435);
   border-radius: 3px;
   margin-top:10px;
   min-width: 190px;
@@ -39,8 +39,10 @@
 }
 .mat-icon{color:rgb(19, 18, 18)
   }
+  
 #edit-button{
-  background-color: rgb(172, 72, 202)
+  background-color: rgba(49, 247, 18, 0.435);
+  border-radius: 5px
 }
 .mat-button{
   
