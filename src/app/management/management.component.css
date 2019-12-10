@@ -1,0 +1,59 @@
+#top-bar{
+  background-color: rgb(167, 69, 219);
+  border-radius: 3px;
+  justify-content: right;
+  font-family: sans 'Courier New',fantasy;
+  font-weight: bold;
+  width:100vw;
+}
+.container{
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(197, 184, 186);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+#clientes{
+  margin:10px;
+}
+#client-bar{
+  background-color: rgb(166, 70, 218);
+  border-radius: 3px;
+  margin-top:10px;
+  min-width: 190px;
+  font-family: sans 'Courier New',fantasy;
+  font-weight: bold;
+}
+#detalhes-card{
+  background-color: white;
+  display: flex;
+}
+#detalhes-itens{
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  
+}
+.mat-icon{color:rgb(19, 18, 18)
+  }
+#edit-button{
+  background-color: rgb(172, 72, 202)
+}
+.mat-button{
+  
+  background-color:beige;
+  padding-left:10px;
+  padding-right: 10px;
+  margin-left: 10px;
+}
+
+.fill-space{
+  flex:1 1 auto;
+}
+#gerencia{
+  padding-bottom: 6px;
+  color: white
+}
