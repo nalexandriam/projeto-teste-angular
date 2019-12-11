@@ -1,7 +1,8 @@
-import { Input, Component, Output, EventEmitter } from '@angular/core';
+import { Input, Component, Output, EventEmitter,OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import * as credenciais from '../credenciais.json';
 import {Router} from '@angular/router';
+import { AuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
 
 @Component({
   selector: 'my-login-form',
@@ -9,19 +10,25 @@ import {Router} from '@angular/router';
   styleUrls: ['./login-form.component.css']
 
 })
-export class LoginFormComponent {
+export class LoginFormComponent implements OnInit {
   form;
   error;
+  user: SocialUser;
+  loggedIn: boolean;
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ){
     this.form = this.formBuilder.group({
       login:'login',
       senha:'senha'
     });
   };
-  
+signInWithFB(): void {
+  this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+}
+
 
   submit() {
     if (this.form.valid) {
@@ -35,6 +42,18 @@ export class LoginFormComponent {
       
     }
   }
+  ngOnInit(){
+    this.authService.authState.subscribe((user) => {
+    this.user = user;
+    this.loggedIn = (user != null);
+    if(this.loggedIn){
+    this.router.navigate(["/management"]);
+  }
+    console.log(this.user);
+  });
+  
+  }
+  
   //@Input() error: string | null;
 
  //@Output() submitEM = new EventEmitter();

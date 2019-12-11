@@ -3,6 +3,7 @@ import {MatDialog, MatDialogConfig} from "@angular/material";
 import {AddClientModalComponent} from '../add-client-modal/add-client-modal.component';
 import {Router} from '@angular/router';
 import {FormBuilder} from '@angular/forms';
+import { AuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
 
 
 
@@ -17,12 +18,14 @@ cliente;
 form;
 count = 0;
 editando= false;
-
+user: SocialUser;
+loggedIn: boolean;
 
   constructor(
     private matDialog: MatDialog,
     private route: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthService
     ){ 
       this.form = formBuilder.group({
         name:"",
@@ -47,7 +50,11 @@ editando= false;
     );
   }
 
+   signOut(): void {
+  this.authService.signOut();
+}
   sair(){
+    this.signOut()
     this.route.navigate(["/login"]);
   }
 
@@ -79,7 +86,12 @@ editando= false;
     };
       this.editando = false;
   }
+
   ngOnInit() {
+
+    
+
+
     this.Clientes.push({
       name:'Natã',
       sobrenome:'Alexandria Menezes',
