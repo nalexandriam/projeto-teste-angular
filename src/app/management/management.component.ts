@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogConfig} from "@angular/material";
 import {AddClientModalComponent} from '../add-client-modal/add-client-modal.component';
 import {Router} from '@angular/router';
+import {FormBuilder} from '@angular/forms';
 
 
 
@@ -15,13 +16,19 @@ Clientes = [];
 cliente;
 form;
 count = 0;
-maps=true;
-latitude=-10.9095;longitude=-37.0748;mapType="satellite";
+editando= false;
+
 
   constructor(
     private matDialog: MatDialog,
-    private route: Router
+    private route: Router,
+    private formBuilder: FormBuilder
     ){ 
+      this.form = formBuilder.group({
+        name:"",
+        sobrenome:"",
+        telefone:""
+      });
     };
 
   onDialog(){
@@ -45,12 +52,32 @@ latitude=-10.9095;longitude=-37.0748;mapType="satellite";
   }
 
   deleteClient(id){
+    console.log(id);
     var tempArray=[]
     for(let i of this.Clientes)
       if(+i.id !== +id)
        tempArray.push(i);
-    this.Clientes = tempArray;
+    this.Clientes = tempArray; 
+  }
+  CancelEditing(){
+    this.editando = false;
+  }
+  editar(){
+    this.editando = true;
+  }
+  saveEdit(formValue,client){
+    if(formValue.name =="")return;
     
+    formValue.id = this.count++;
+    let j = 0;
+    let clientId = client.id;
+    for(let i of this.Clientes){
+      if(+i.id === +clientId){
+        this.Clientes[j]=formValue;
+        };
+      j++;
+    };
+      this.editando = false;
   }
   ngOnInit() {
     this.Clientes.push({

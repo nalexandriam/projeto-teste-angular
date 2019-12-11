@@ -19,8 +19,9 @@ data;
     @Inject(MAT_DIALOG_DATA)data
   ) {
       this.form = formBuilder.group({
-      name:'name',
-      sobrenome:'sobrenome',
+      name:'',
+      sobrenome:'',
+      telefone:'',
       id:'-'
       });
       this.data = data;

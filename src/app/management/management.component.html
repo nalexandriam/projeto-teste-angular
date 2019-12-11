@@ -12,7 +12,7 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<div *ngIf="">
+<div *ngIf="true">
   <div class='container'>
    <div *ngFor="let cliente of Clientes">  
      <div id="clientes">
@@ -22,31 +22,40 @@
             {{cliente.name}}
             </font>
             <span class="fill-space"></span>
-            <button id="edit-button"type='submit' mat-button (click)="deleteClient(cliente.id)"><mat-icon>delete_forever</mat-icon></button>
+            <button  *ngIf="!editando" id="edit-button"type='submit' mat-button (click)="editar()"><mat-icon>edit</mat-icon></button>
+            <button *ngIf="editando" id="edit-button"type='submit' mat-button (click)="deleteClient(cliente.id)"><mat-icon>delete_forever</mat-icon></button>
           
          </mat-toolbar-row>
       </mat-toolbar>
       
-      <div id="detalhes-card">
+      <div id="detalhes-card" *ngIf="!editando">
         <img id='client-logo' src="https://github.com/nalexandriam/Angular-JumpStart/blob/master/src/assets/images/male.png?raw=true" height="42">
-        <div id="detalhes-cliente" >
-          <div id="item-detalhe">{{cliente.name}}</div>
-          <div id="item-detalhe">{{cliente.sobrenome}}</div>
-          <div id="item-detalhe">{{cliente.id}}</div>
-          
-
+        <div id="detalhes-cliente">
+          <div>{{cliente.name}} </div>
+          <div>{{cliente.sobrenome}}</div>
+          <div>{{cliente.telefone}} </div>
         </div>
       </div>
+        <div id="detalhes-cliente" *ngIf="editando">
+          <form [formGroup]="form">
+          <div><input type="text" class="mat-form-field" placeholder="Nome" formControlName="name"></div>
+          <div><input type="text" class="mat-form-field" placeholder="Sobrenome" formControlName="sobrenome"></div>
+          <div><input type="text" class="mat-form-field" placeholder="Telefone" formControlName="telefone"></div>
+          <div><button class="mat-raised-button"(click)="CancelEditing()">Cancelar</button>
+          <button class="mat-raised-button mat-primary"(click)="saveEdit(form.value,cliente)">Save</button></div>
+          </form>
+        </div>
+      
 
      </div>
    </div>
   </div>
 </div>
-<div *ngIf="maps">
+<!--<div *ngIf="maps">
   <div class="map-container">
     <agm-map [latitude]='latitude' [longitude]='longitude' 
       [mapTypeId]='mapType'>
     </agm-map>
   </div>
 
-</div>
+</div>-->
