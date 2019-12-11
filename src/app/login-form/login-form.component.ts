@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import * as credenciais from '../credenciais.json';
 import {Router} from '@angular/router';
 import { AuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-login';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'my-login-form',
@@ -15,18 +16,29 @@ export class LoginFormComponent implements OnInit {
   error;
   user: SocialUser;
   loggedIn: boolean;
+  noLogin = true;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private activatedRoute: ActivatedRoute
   ){
     this.form = this.formBuilder.group({
       login:'login',
       senha:'senha'
     });
   };
+  
 signInWithFB(): void {
   this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+   this.authService.authState.subscribe((user) => {
+    this.user = user;
+    this.loggedIn = (user != null);
+    if(this.loggedIn){
+      this.router.navigate(["/management"]);
+    }
+    console.log(this.user);
+  });
 }
 
 
@@ -39,18 +51,10 @@ signInWithFB(): void {
      }else {
         this.error = 'Usuario ou senha incorretos';
       }
-      
     }
   }
   ngOnInit(){
-    this.authService.authState.subscribe((user) => {
-    this.user = user;
-    this.loggedIn = (user != null);
-    if(this.loggedIn){
-    this.router.navigate(["/management"]);
-  }
-    console.log(this.user);
-  });
+   
   
   }
   

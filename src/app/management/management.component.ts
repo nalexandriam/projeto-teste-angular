@@ -54,8 +54,10 @@ loggedIn: boolean;
   this.authService.signOut();
 }
   sair(){
-    this.signOut()
-    this.route.navigate(["/login"]);
+    this.signOut();
+    this.loggedIn = false;
+    this.route.navigate(["/login"],{queryParams:{logout:true}});
+    
   }
 
   deleteClient(id){
@@ -89,7 +91,11 @@ loggedIn: boolean;
 
   ngOnInit() {
 
-    
+    this.authService.authState.subscribe((user) => {
+    this.user = user;
+    this.loggedIn = (user != null);
+    console.log(this.user);
+  });
 
 
     this.Clientes.push({
