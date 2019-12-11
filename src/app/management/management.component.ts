@@ -4,6 +4,7 @@ import {AddClientModalComponent} from '../add-client-modal/add-client-modal.comp
 import {Router} from '@angular/router';
 
 
+
 @Component({
   selector: 'app-management',
   templateUrl: './management.component.html',
@@ -14,6 +15,8 @@ Clientes = [];
 cliente;
 form;
 count = 0;
+maps=true;
+latitude=-10.9095;longitude=-37.0748;mapType="satellite";
 
   constructor(
     private matDialog: MatDialog,

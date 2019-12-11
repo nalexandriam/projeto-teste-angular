@@ -10,9 +10,11 @@ import { MaterialModule } from './material.module';
 import {RouterModule} from '@angular/router';
 import { ManagementComponent } from './management/management.component';
 import {AddClientModalComponent} from './add-client-modal/add-client-modal.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports:      [ BrowserModule, ReactiveFormsModule, MaterialModule, BrowserAnimationsModule,
+  AgmCoreModule.forRoot({apiKey:'AIzaSyBVsiSnscjSyUMWZL-y5BKrtdQfjhh4SNc'}),
   RouterModule.forRoot([
     {path:'', pathMatch:'full',redirectTo:'login'},
     {path:'login',component:LoginFormComponent},
