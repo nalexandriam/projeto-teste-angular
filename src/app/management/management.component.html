@@ -4,9 +4,10 @@
     <span id='gerencia'>Gerência</span>
     <span class="fill-space"></span>
       <span>
-        <button mat-button type="submit" (click)="onDialog()" ><mat-icon inline='true'>edit</mat-icon> Editar</button>
-        <button mat-button type="submit" (click)="onDialog()" ><mat-icon inline='true'>add_circle</mat-icon> add Cliente</button>
-        <button mat-button type="submit"(click)="sair()"><mat-icon inline='true'>exit_to_app</mat-icon> Sair</button>
+        <button mat-button type="submit" (click)="CancelEditing()" *ngIf="editando" ><mat-icon inline='true'>edit</mat-icon> Finalizar</button>
+        <button mat-button type="submit" (click)="editar()" *ngIf="!editando" ><mat-icon inline='true'>edit</mat-icon> Editar</button>
+        <button mat-button type="submit" (click)="onDialog()" *ngIf="!editando" ><mat-icon inline='true'>add_circle</mat-icon> add Cliente</button>
+        <button mat-button type="submit"(click)="sair()" *ngIf="!editando"><mat-icon inline='true'>exit_to_app</mat-icon> Sair</button>
       </span>
       
   </mat-toolbar-row>
@@ -14,7 +15,7 @@
 
 <div *ngIf="true">
   <div class='container'>
-   <div *ngFor="let cliente of Clientes">  
+   <div *ngFor="let cliente of Clientes; index as i">  
      <div id="clientes">
       <mat-toolbar id="client-bar">
          <mat-toolbar-row >
@@ -22,13 +23,13 @@
             {{cliente.name}}
             </font>
             <span class="fill-space"></span>
-            <button  *ngIf="!editando" id="edit-button"type='submit' mat-button (click)="editar()"><mat-icon>edit</mat-icon></button>
+            <button *ngIf="!editando" id="edit-button"type='submit' mat-button (click)="deleteClient(cliente.id)"><mat-icon>delete_forever</mat-icon></button>
             <button *ngIf="editando" id="edit-button"type='submit' mat-button (click)="deleteClient(cliente.id)"><mat-icon>delete_forever</mat-icon></button>
           
          </mat-toolbar-row>
       </mat-toolbar>
       
-      <div id="detalhes-card" *ngIf="!editando">
+      <div id="detalhes-card" >
         <img id='client-logo' src="https://github.com/nalexandriam/Angular-JumpStart/blob/master/src/assets/images/male.png?raw=true" height="42">
         <div id="detalhes-cliente">
           <div>{{cliente.name}} </div>
@@ -36,15 +37,14 @@
           <div>{{cliente.telefone}} </div>
         </div>
       </div>
-        <div id="detalhes-cliente" *ngIf="editando">
-          <form [formGroup]="form">
+        <!--<div id="detalhes-cliente"  *ngIf="editando">
+          <form [formGroup]="forms[i]">
           <div><input type="text" class="mat-form-field" placeholder="Nome" formControlName="name"></div>
           <div><input type="text" class="mat-form-field" placeholder="Sobrenome" formControlName="sobrenome"></div>
           <div><input type="text" class="mat-form-field" placeholder="Telefone" formControlName="telefone"></div>
-          <div><button class="mat-raised-button"(click)="CancelEditing()">Cancelar</button>
-          <button class="mat-raised-button mat-primary"(click)="saveEdit(form.value,cliente)">Save</button></div>
+          <div><button class="mat-raised-button mat-primary"(click)="saveEdit(form.value,cliente)">Save</button></div>
           </form>
-        </div>
+        </div>-->
       
 
      </div>

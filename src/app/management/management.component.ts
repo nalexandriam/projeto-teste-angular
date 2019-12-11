@@ -28,7 +28,7 @@ loggedIn: boolean;
     private authService: AuthService
     ){ 
       this.form = formBuilder.group({
-        name:"",
+        name:"mcloudad",
         sobrenome:"",
         telefone:""
       });
@@ -48,6 +48,16 @@ loggedIn: boolean;
           this.Clientes.push(data);
           console.log("Dialog output:", data);}
     );
+  }
+
+  editClientDialog(client){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {edit:true,client};
+    const dialogRef =this.matDialog.open(AddClientModalComponent,dialogConfig);
+
   }
 
    signOut(): void {
@@ -73,8 +83,11 @@ loggedIn: boolean;
   }
   editar(){
     this.editando = true;
+
   }
   saveEdit(formValue,client){
+    console.log(client);
+   
     if(formValue.name =="")return;
     
     formValue.id = this.count++;
@@ -86,10 +99,13 @@ loggedIn: boolean;
         };
       j++;
     };
-      this.editando = false;
-  }
+      console.log(this.form)
+      
+      
+  };
 
   ngOnInit() {
+    
 
     this.authService.authState.subscribe((user) => {
     this.user = user;

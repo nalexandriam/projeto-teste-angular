@@ -44,6 +44,9 @@ agm-map {
   flex-direction: column;
   
 }
+.hide{
+  display: none;
+}
 .mat-icon{color:rgb(19, 18, 18)
   }
   
