@@ -15,7 +15,7 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<div *ngIf="true">
+<div *ngIf="!buscando">
   <div class='container'>
    <div *ngFor="let cliente of Clientes; index as i">  
      <div id="clientes">
@@ -52,6 +52,36 @@
      </div>
    </div>
   </div>
+  
+</div>
+<div *ngIf="buscando">
+  <div class='container'>
+   <div *ngFor="let cliente of resultados; index as i">  
+     <div id="clientes">
+      <mat-toolbar id="client-bar">
+         <mat-toolbar-row >
+          <font color="white"> 
+            {{cliente.name}}
+            </font>
+            <span class="fill-space"></span>
+            <button *ngIf="!apagando" id="edit-button"type='submit' mat-button (click)="editClientDialog(cliente)"><mat-icon>edit</mat-icon></button>
+            <button *ngIf="apagando" id="edit-button"type='submit' mat-button (click)="deleteClient(cliente.id)"><mat-icon>delete_forever</mat-icon></button>
+          
+         </mat-toolbar-row>
+      </mat-toolbar>
+      
+      <div id="detalhes-card" >
+        <img id='client-logo' src="https://github.com/nalexandriam/Angular-JumpStart/blob/master/src/assets/images/male.png?raw=true" height="42">
+        <div id="detalhes-cliente">
+          <div>{{cliente.name}} </div>
+          <div>{{cliente.sobrenome}}</div>
+          <div>{{cliente.telefone}} </div>
+        </div>
+      </div>
+     </div>
+   </div>
+  </div>
+  
 </div>
 <!--<div *ngIf="maps">
   <div class="map-container">

@@ -83,10 +83,19 @@ resultados = [];
   deleteClient(id){
     console.log(id);
     var tempArray=[]
+    
     for(let i of this.Clientes)
       if(+i.id !== +id)
        tempArray.push(i);
-    this.Clientes = tempArray; 
+    this.Clientes = tempArray;
+  tempArray = [];
+    for(let i of this.resultados){
+      if(+i.id !== +id)
+        tempArray.push(i);
+    this.resultados = tempArray;
+      }
+    
+    
   }
   CancelEditing(){
     this.apagando = false;
@@ -108,14 +117,18 @@ resultados = [];
       console.log(this.form) 
   };
 
-  buscarCliente(cliente){
-   
+  buscarCliente(cliente?){
+    this.buscando =true;
+    if(cliente.target.value ==="")
+    this.buscando=false;
+   this.resultados = [];
     console.log( cliente.target.value)
     for(let i of this.Clientes){
       if(i.name ===  cliente.target.value){
         this.resultados.push(i);
       }
     };
+    
     console.log(this.resultados);
   }
 
