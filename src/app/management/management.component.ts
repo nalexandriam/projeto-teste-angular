@@ -63,8 +63,14 @@ resultados = [];
 
     dialogRef.afterClosed().subscribe(
         data => {
-          if(!data.invalid)
+          if(!data.invalid){
             this.saveEdit(data);
+            if(this.buscando){
+              console.log(data.name+"===")
+              this.atualizarBusca(data.name);
+            }
+          }
+            
           console.log("Dialog output:", data);}
     );
 
@@ -95,10 +101,11 @@ resultados = [];
     this.resultados = tempArray;
       }
     
-    
   }
   CancelEditing(){
     this.apagando = false;
+    if(this.resultados.length === 0)
+      this.buscando = false;
   }
   editar(){
     this.apagando = true;
@@ -117,19 +124,36 @@ resultados = [];
       console.log(this.form) 
   };
 
-  buscarCliente(cliente?){
-    this.buscando =true;
-    if(cliente.target.value ==="")
-    this.buscando=false;
-   this.resultados = [];
-    console.log( cliente.target.value)
+  atualizarBusca(nome){
+    this.resultados = [];
     for(let i of this.Clientes){
-      if(i.name ===  cliente.target.value){
+      if(i.name === nome){
+        this.resultados.push(i);
+      }
+    }
+  }
+
+  buscarCliente(cliente?){
+    var nome;
+    
+    if( !!cliente.target.value) if(cliente.target.value !==""){
+      nome = cliente.target.value;
+      this.buscando =true;
+    }
+    if(!!!cliente.target.value)this.buscando =false;
+    
+   this.resultados = [];
+    console.log( !!cliente.target.value+"!!"+this.buscando)
+    for(let i of this.Clientes){
+      if(i.name ===  nome){
         this.resultados.push(i);
       }
     };
-    
+    if(nome === "")
+      this.buscando = false;
     console.log(this.resultados);
+    
+    
   }
 
 
