@@ -198,6 +198,21 @@ home(){
       sobrenome:'Alexandria Menezes',
       id:this.count++
     });
+    this.Clientes.push({
+      name:'rodrigo',
+      sobrenome:'Alexandria Menezes',
+      id:this.count++
+    });
+    this.Clientes.push({
+      name:'rodreze',
+      sobrenome:'Alexandria Menezes',
+      id:this.count++
+    });
+    this.Clientes.push({
+      name:'rodrezo',
+      sobrenome:'Alexandria Menezes',
+      id:this.count++
+    });
   }
 
 }
