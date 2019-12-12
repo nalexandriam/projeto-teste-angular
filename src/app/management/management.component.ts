@@ -144,8 +144,9 @@ resultados = [];
     
    this.resultados = [];
     console.log( !!cliente.target.value+"!!"+this.buscando)
+
     for(let i of this.Clientes){
-      if(i.name ===  nome){
+      if(i.name.includes(nome)){
         this.resultados.push(i);
       }
     };
