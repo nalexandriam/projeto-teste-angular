@@ -1,4 +1,5 @@
-<h2 mat-dialog-title>Novo Cliente</h2>
+<h2 *ngIf="!editar" mat-dialog-title>Novo Cliente</h2>
+<h2 *ngIf="editar" mat-dialog-title>Editar</h2>
 
 <mat-dialog-content [formGroup]="form">
   

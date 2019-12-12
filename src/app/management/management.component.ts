@@ -7,6 +7,7 @@ import { AuthService, FacebookLoginProvider, SocialUser } from 'angularx-social-
 
 
 
+
 @Component({
   selector: 'app-management',
   templateUrl: './management.component.html',
@@ -17,9 +18,11 @@ Clientes = [];
 cliente;
 form;
 count = 0;
-editando= false;
+apagando= false;
 user: SocialUser;
 loggedIn: boolean;
+buscando = false;
+resultados = [];
 
   constructor(
     private matDialog: MatDialog,
@@ -58,6 +61,13 @@ loggedIn: boolean;
     dialogConfig.data = {edit:true,client};
     const dialogRef =this.matDialog.open(AddClientModalComponent,dialogConfig);
 
+    dialogRef.afterClosed().subscribe(
+        data => {
+          if(!data.invalid)
+            this.saveEdit(data);
+          console.log("Dialog output:", data);}
+    );
+
   }
 
    signOut(): void {
@@ -79,30 +89,36 @@ loggedIn: boolean;
     this.Clientes = tempArray; 
   }
   CancelEditing(){
-    this.editando = false;
+    this.apagando = false;
   }
   editar(){
-    this.editando = true;
+    this.apagando = true;
 
   }
-  saveEdit(formValue,client){
+  saveEdit(client){
     console.log(client);
-   
-    if(formValue.name =="")return;
-    
-    formValue.id = this.count++;
     let j = 0;
     let clientId = client.id;
     for(let i of this.Clientes){
       if(+i.id === +clientId){
-        this.Clientes[j]=formValue;
+        this.Clientes[j]=client;
         };
       j++;
     };
-      console.log(this.form)
-      
-      
+      console.log(this.form) 
   };
+
+  buscarCliente(cliente){
+   
+    console.log( cliente.target.value)
+    for(let i of this.Clientes){
+      if(i.name ===  cliente.target.value){
+        this.resultados.push(i);
+      }
+    };
+    console.log(this.resultados);
+  }
+
 
   ngOnInit() {
     
@@ -115,6 +131,25 @@ loggedIn: boolean;
 
 
     this.Clientes.push({
+      name:'Natã',
+      sobrenome:'Alexandria Menezes',
+      id:this.count++
+    });
+    this.Clientes.push({
+      name:'maxine',
+      sobrenome:'Alexandria Menezes',
+      id:this.count++
+    });
+    this.Clientes.push({
+      name:'Natã',
+      sobrenome:'Alexandria Menezes',
+      id:this.count++
+    });
+    this.Clientes.push({
+      name:'maxine',
+      sobrenome:'Alexandria Menezes',
+      id:this.count++
+    });this.Clientes.push({
       name:'Natã',
       sobrenome:'Alexandria Menezes',
       id:this.count++

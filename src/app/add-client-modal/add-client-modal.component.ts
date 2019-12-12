@@ -13,6 +13,7 @@ export class AddClientModalComponent implements OnInit {
 form;
 teste;
 data;
+editar = false
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<AddClientModalComponent>,
@@ -29,6 +30,8 @@ data;
   };
   
   save(){
+    console.log(this.data)
+    if(this.data.id)
     this.form.value.id = this.data.id;
     if(this.form.value.name !== '' && this.form.value !== '')
     this.dialogRef.close(this.form.value);
@@ -38,6 +41,16 @@ data;
     this.dialogRef.close({invalid:true});
   }
   ngOnInit() {
+    if(this.data.edit){
+      console.log("funciona")
+      this.editar=true;
+      this.form = this.formBuilder.group({
+        name:this.data.client.name,
+        sobrenome:this.data.client.sobrenome,
+        telefone:this.data.client.telefone,
+        id:this.data.client.id
+      })
+      }
   }
 
 }
