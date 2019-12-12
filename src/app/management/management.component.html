@@ -5,8 +5,12 @@
     <span class="fill-space"></span>
       <span>
         <input type="text" id="buscar" placeholder="Cliente" class="mat-form-field"  inline='true' *ngIf='!apagando' (keyup)="buscarCliente($event)">
+  
 
         <button mat-button type="submit" (click)="CancelEditing()" *ngIf="apagando" ><mat-icon inline='true'>edit</mat-icon> Finalizar</button>
+
+         <button mat-button type="submit" (click)="home()" *ngIf="!apagando " ><mat-icon inline='true'>home</mat-icon> Início</button>
+
         <button mat-button type="submit" (click)="editar()" *ngIf="!apagando " ><mat-icon inline='true'>delete_forever</mat-icon> Deletar Clientes</button>
         <button mat-button type="submit" (click)="onDialog()" *ngIf="!apagando" ><mat-icon inline='true'>add_circle</mat-icon> add Cliente</button>
         <button mat-button type="submit"(click)="sair()" *ngIf="!apagando"><mat-icon inline='true'>exit_to_app</mat-icon> Sair</button>

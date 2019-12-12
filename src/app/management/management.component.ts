@@ -152,10 +152,11 @@ resultados = [];
     if(nome === "")
       this.buscando = false;
     console.log(this.resultados);
-    
-    
   }
-
+home(){
+  this.buscando = false;
+  this.apagando = false;
+}
 
   ngOnInit() {
     
